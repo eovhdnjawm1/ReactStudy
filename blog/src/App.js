@@ -8,6 +8,8 @@ function App() {
   const [good, goodCount] = useState([0,0,0])
   const [modalOnOff, setModal] = useState(false)
   const [propsTitle, setPropsTitle] = useState(0)
+  const [입력값, 입력값변경] = useState('');
+  const [표시값, 표시값변경] = useState('');
   // destructuring 문법
   // let num = [1, 2];
   // let [a, c] = num;
@@ -35,10 +37,10 @@ function App() {
             return (
               <div className='list' key={i}>
                 <button onClick={() => {
-                  {
+                  
                     setPropsTitle(i)
                     setModal(!modalOnOff)
-                  }
+                  
                 }}>모달창 오픈</button>
                 <h4>{val}
                   <span onClick={() => {
@@ -48,12 +50,39 @@ function App() {
                     goodCount(따봉);
                   }}>{good[i]}
                   </span>
+                <button onClick={() => {
+                  // const num = i;
+                  // setTitle(title.filter((입력값, i) => i !== num))
+                  
+                  let copy = [...title];
+                  copy.splice(i, 1);
+                  setTitle(copy);
+                }}>리스트 삭제</button>
                 </h4>
                 <p>2월 17일 발행</p>
               </div>
             )
           })
         }
+        <input type="text" onChange={(e) => {
+          console.log(e.target.value);
+          입력값변경(e.target.value);
+          표시값변경(입력값);
+
+          // e.target 요 이벤트가 발생하는곳
+          // e.target.value 입력한 값을 알려줌
+        }}>
+
+        </input>
+        <button onClick={() => {
+          
+          return(
+            
+            setTitle([입력값, ...title ])
+
+          )
+        }}>추가하기</button>
+        <h4>{표시값}</h4>
       </div>
       {
         modalOnOff === true ? <Modal setTitle={setTitle} title={title} title2={title2} propsTitle={propsTitle} /> : null
