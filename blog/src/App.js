@@ -2,13 +2,12 @@ import './App.css';
 import { useState } from 'react'
 
 function App() {
-  let [글제목, b] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬독학'])
-  let [logo, setLogo] = useState('ReactBlog')
-  let [따봉, 따봉변경] = useState([0, 0, 0]);
-  // 작명 2개 할 수 있음
 
-  let [modal, setModal] = useState(false);
-
+  const [title, setTitle] = useState(['남자코트 추천', '강남 우동맛집', '파이썬 독학'])
+  const [title2, setTitle2] = useState(['여자 코트 추천', '역삼 우동맛집', 'c++ 독학'])
+  const [good, goodCount] = useState([0,0,0])
+  const [modalOnOff, setModal] = useState(false)
+  const [propsTitle, setPropsTitle] = useState(0)
   // destructuring 문법
   // let num = [1, 2];
   // let [a, c] = num;
@@ -26,79 +25,53 @@ function App() {
   // state 갈아 치울때 기존과 신규가 같으면 변경안해줌 ( 자원 절약 )
   // array/object 특징 array를 변수에 담으면 배열의 주소만을 변수에 담겨져있음
   // 고로 신규 스테이트와 기존 스테이트가 같은 주소값을 바라보고있기 때문에 안바뀜
-  const count = [1, 2, 3];
+
   return (
     <div className="App">
-      <button onClick={() => {
-        const sortArray = [...글제목];
-        sortArray.sort()
-        b(sortArray)
-      }}>가나다순 정리 버튼 </button>
-      {/* <div className="black-nav">
-        <h4 >{logo}</h4>
-      </div>
-      <div className="list">
-        <h4>{글제목[0]}<span onClick={() => { 따봉변경(따봉 += 1) }}>✌</span> {따봉} </h4>
-        <p>2월 17일 발행</p>
-        <button onClick={() => {
-          let copy = [...글제목];
-          copy[0] = '여자코트 추천'
-          b(copy);
-        }}>제목 변경하기</button>
-      </div>
 
-      <div className="list" style={{ fontSize: "14px" }}>
-        <h4>{글제목[1]}<span>✌</span> {따봉} </h4>
-        <p>2월 17일 발행</p>
+      <div >
+        {
+          title.map(function (val, i) {
+            return (
+              <div className='list' key={i}>
+                <button onClick={() => {
+                  {
+                    setPropsTitle(i)
+                    setModal(!modalOnOff)
+                  }
+                }}>모달창 오픈</button>
+                <h4>{val}
+                  <span onClick={() => {
+                    var 따봉 = [...good]
+                    따봉[i] += 1;
+                    
+                    goodCount(따봉);
+                  }}>{good[i]}
+                  </span>
+                </h4>
+                <p>2월 17일 발행</p>
+              </div>
+            )
+          })
+        }
       </div>
-      <div className="list">
-        <h4>{글제목[2]}<span>✌</span> {따봉} </h4>
-        <p>2월 17일 발행</p>
-      </div> */}
       {
-        // 조건문을 쓸려면 if 는 안되니깐 삼항 연산자를 써야한다.
-        modal === true ? <TitleModal /> : null
-      }
-      {/* <button onClick={() =>{
-        if(modal === false)
-        setModal(true)
-        else
-        setModal(false)}}>모달창</button> */}
-
-      <button onClick={() => {
-        setModal(!modal)
-      }}>모달창</button>
-
-      {
-        // 중괄호 안에서는 for이 안된다
-
-        글제목.map(function (val, i) {
-          return (
-            <div className="list" key={i}>
-              <h4>{val}
-                <span onClick={() => {
-                  var test = [...따봉]
-                  test[i] += 1; 
-                  // 따봉[i] = test[i]
-                  따봉변경(test)
-                }}
-                
-                >✌{따봉[i]}</span>
-              </h4>
-              <p>2월 17일 발행</p>
-            </div>)
-        })
+        modalOnOff === true ? <Modal setTitle={setTitle} title={title} title2={title2} propsTitle={propsTitle} /> : null
       }
     </div>
   );
 }
 
-function TitleModal() {
-  return (
+function Modal(props) {
+  return(
     <div className='modal'>
-      <h4>제목</h4>
-      <p>날짜</p>
-      <p>상세내용</p>
+      <div>제목 {props.title[props.propsTitle]}</div>
+      <div>날짜</div>
+      <div>상세내용</div>
+      <button onClick={ () => {
+        // props.setTitle[props.title2]
+        props.setTitle(props.title2)
+      }}>제목 변경하기</button>
     </div>
   )
 }
