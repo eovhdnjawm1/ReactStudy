@@ -34,17 +34,21 @@ function DetailApp(props) {
 
 	let [alert, setAlert] = useState(true)
 
+	let [textInp, setInp] = useState('')
+
 
 	useEffect(() => {
-		let a = setTimeout(() => {
-			setAlert(false)
-		}, 2000)
+		let a = (() => {
+			
+		})
 		return () => {
 			
 			clearTimeout(a);
 		}
 
 	},[ ])
+
+	
 
 
 	return (
@@ -67,6 +71,7 @@ function DetailApp(props) {
 					<h4 className="pt-5">{찾은상품.title}</h4>
 					<p>{찾은상품.content}</p>
 					<p>{찾은상품.price}</p>
+					<input type={"text"}></input>
 					<button className="btn btn-danger">주문하기</button>
 				</div>
 			</div>
