@@ -5,9 +5,14 @@
   background-position: center;
 }
 
+.shoes img {
+  width: 80%;
+}
+
 .App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;
