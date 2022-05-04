@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 // data.js 에 있는 id 값을 불러와야함
 // 지금은 URL 0이면 그냥 id 값이 뭐든 가져오는데
 // id 값에 맞는걸 가져와야한다
+
+
 
 let YellowBtn = styled.button`
 	background : ${props => props.bg};
@@ -12,27 +15,45 @@ let YellowBtn = styled.button`
 
 `
 
-let NewBtn = styled.button(YellowBtn)`
-
-`
-
 let BlackBox = styled.div`
 	background : black;
 	padding: 20px;
-	width: 25px;
-	height: 25px;
+	width: 150px;
+	height: 100px;
+	color: #fff;
 `
-
+// setTimeout(() => {실행할 코드}, 1000 ms) 
 function DetailApp(props) {
+
+	
+	let [count, setCount] = useState(0)
 	let {id} = useParams();
 	let 찾은상품 = props.shoes.find(function(x){
 		return x.id == id;
 	});	
+
+	let [alert, setalert] = useState(true)
+
+
+	useEffect(() => {
+		setTimeout(() => {
+			setalert(false)
+		}, 2000)
+	})
+
+
 	return (
 		<div className="container">
-			<YellowBtn>버튼</YellowBtn>
+			{count}
+			<YellowBtn onClick={() => {
+				setCount(count+1);
+			}}>버튼</YellowBtn>
 			<YellowBtn bg="blue">버튼</YellowBtn>
-			<BlackBox></BlackBox>
+{
+	alert === true ? <BlackBox >2초 안에 누르면 할인</BlackBox> : null
+}
+
+			
 			<div className="row">
 				<div className="col-md-6">
 					<img src={`${찾은상품.image}`} width="100%" alt="#"/>
