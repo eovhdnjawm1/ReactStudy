@@ -32,14 +32,19 @@ function DetailApp(props) {
 		return x.id == id;
 	});	
 
-	let [alert, setalert] = useState(true)
+	let [alert, setAlert] = useState(true)
 
 
 	useEffect(() => {
-		setTimeout(() => {
-			setalert(false)
+		let a = setTimeout(() => {
+			setAlert(false)
 		}, 2000)
-	})
+		return () => {
+			
+			clearTimeout(a);
+		}
+
+	},[ ])
 
 
 	return (
