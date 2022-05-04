@@ -44,7 +44,7 @@ function App() {
             }
           </Row>
         </Container>} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:id" element={<DetailPage shoes={shoes} />} />
         <Route path="/about" element={<About />} />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
