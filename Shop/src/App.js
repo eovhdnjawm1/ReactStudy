@@ -10,6 +10,9 @@ import axios from 'axios';
 function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
+  let [jsonCount, setjsonCount] = useState(2);
+  let [btnOnOff, setBtnOnOff] = useState(true);
+  let [loding, setLoding] = useState(false);
 
   return (
     <div className="App">
@@ -51,24 +54,36 @@ function App() {
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
         </Route>
-        
         <Route path="*" element={<h1>없는 페이지 입니다.</h1>} />
       </Routes>
-        <button onClick={() => {
+      {
+        loding === true ? <h2 style={{display:'block'}}>로딩중...</h2> : null
+      }
+      {
+
+        btnOnOff === true ? <button onClick={() => {
           
-          axios.get('https://codingapple1.github.io/shop/data2.json')
+          axios.get(`https://codingapple1.github.io/shop/data${jsonCount}.json`)
           .then((result) => {
+            // 로딩중 띄우기
+            setLoding(true);
             const arr1 = [...shoes];
             const arr2 = [...result.data];
+            setjsonCount(jsonCount += 1)
+            jsonCount > 3 ? setBtnOnOff(false) : jsonCount += 1;
             
             arr1.push(...arr2);
             console.log(arr1)
             setShoes(arr1);
+            setLoding(false);
+            
           })
           .catch((e) => {
             console.log(e,'실패함');
+            // 로딩중 숨기기~
           })
         }}>버튼</button>
+     : null }
     </div>
   );
 }
