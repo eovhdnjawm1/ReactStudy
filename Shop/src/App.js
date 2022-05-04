@@ -5,9 +5,10 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import DetailPage from './pages/detail.js';
 import BackImg from './img/background.jpg'
 import data from './data.js';
+import axios from 'axios';
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -53,6 +54,21 @@ function App() {
         
         <Route path="*" element={<h1>없는 페이지 입니다.</h1>} />
       </Routes>
+        <button onClick={() => {
+          
+          axios.get('https://codingapple1.github.io/shop/data2.json')
+          .then((result) => {
+            const arr1 = [...shoes];
+            const arr2 = [...result.data];
+            
+            arr1.push(...arr2);
+            console.log(arr1)
+            setShoes(arr1);
+          })
+          .catch((e) => {
+            console.log(e,'실패함');
+          })
+        }}>버튼</button>
     </div>
   );
 }
