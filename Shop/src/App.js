@@ -16,26 +16,20 @@ function App() {
 
   return (
     <div className="App">
-      
+      <Navbar bg="dark" variant="dark" style={{width:"100vw"}}>
+        <div>
+          <Navbar.Brand href="#home">호두네점빵</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link onClick={() => { navigate('/') }}>홈</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/detail') }}>메뉴</Nav.Link>
+            <Nav.Link onClick={() => { navigate(-1) }}>주문하기</Nav.Link>
+          </Nav>
+        </div>
+      </Navbar>
 
-        <Link to="/">홈</Link>
-        <Link to="/detail">상세페이지</Link>
-
-        <Button variant="primary">Primary</Button>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand href="#home">호두네점빵</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link onClick={() => { navigate('/') }}>홈</Nav.Link>
-              <Nav.Link onClick={() => { navigate('/detail') }}>메뉴</Nav.Link>
-              <Nav.Link onClick={() => { navigate(-1) }}>주문하기</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-        
-        <Routes>
-        <Route  path="/" element={ <Container style={{  padding:"0"}}>
-          <div className='main-bg' style={{ width:"100vw", objectFit:"cover",  backgroundImage: `url(${BackImg})` }}></div>
+      <Routes>
+        <Route path="/" element={<Container style={{ margin:"0", padding: "0", width:"100vw" }}>
+          <div className='main-bg' style={{ marginLeft:"50px", width: "100vw", objectFit: "cover", backgroundImage: `url(${BackImg})` }}></div>
           <Row>
             {
               shoes.map(function (val, i) {
@@ -56,34 +50,36 @@ function App() {
         </Route>
         <Route path="*" element={<h1>없는 페이지 입니다.</h1>} />
       </Routes>
-      {
-        loding === true ? <h2 style={{display:'block'}}>로딩중...</h2> : null
-      }
+
       {
 
         btnOnOff === true ? <button onClick={() => {
-          
+
           axios.get(`https://codingapple1.github.io/shop/data${jsonCount}.json`)
-          .then((result) => {
-            // 로딩중 띄우기
-            setLoding(true);
-            const arr1 = [...shoes];
-            const arr2 = [...result.data];
-            setjsonCount(jsonCount += 1)
-            jsonCount > 3 ? setBtnOnOff(false) : jsonCount += 1;
-            
-            arr1.push(...arr2);
-            console.log(arr1)
-            setShoes(arr1);
-            setLoding(false);
-            
-          })
-          .catch((e) => {
-            console.log(e,'실패함');
-            // 로딩중 숨기기~
-          })
+            .then((result) => {
+              // 로딩중 띄우기
+              setLoding(true);
+              const arr1 = [...shoes];
+              const arr2 = [...result.data];
+              setjsonCount(jsonCount += 1)
+              jsonCount > 3 ? setBtnOnOff(false) : jsonCount += 1;
+
+              arr1.push(...arr2);
+              console.log(arr1)
+              setShoes(arr1);
+              setLoding(false);
+
+            })
+            .catch((e) => {
+              console.log(e, '실패함');
+              // 로딩중 숨기기~
+            })
         }}>버튼</button>
-     : null }
+          : <h2>더이상 상품이 없다.</h2>}
+      {
+        loding === true ? <h2>로딩중...</h2> : null
+      }
+
     </div>
   );
 }

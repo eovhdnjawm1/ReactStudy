@@ -8,3 +8,31 @@
 .shoes img {
   width: 80%;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.start {
+  opacity: 0;
+
+}
+
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.mainStart {
+  opacity: 0;
+}
+
+.mainEnd {
+  opacity: 1;
+  transition: opacity 1s;
+}
