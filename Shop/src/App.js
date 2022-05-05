@@ -1,11 +1,15 @@
 import { Button, Navbar, Container, Nav, Row, Col } from 'react-bootstrap'
 import './App.css';
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import DetailPage from './pages/detail.js';
 import BackImg from './img/background.jpg'
 import data from './data.js';
 import axios from 'axios';
+import React from 'react';
+import Cart from './Cart.js';
+
+let 재고context = React.createContext();
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -14,8 +18,20 @@ function App() {
   let [btnOnOff, setBtnOnOff] = useState(true);
   let [loding, setLoding] = useState(false);
 
+  let [재고, 재고변경] = useState([10, 11, 12]);
+
   return (
     <div className="App">
+
+      <재고context.Provider value={재고}>
+        <div>
+          재고값 {재고[0]}
+          <Event />
+        </div>
+      </재고context.Provider>
+      <p>
+        두번째 재고값 {재고[0]}
+      </p>
       <Navbar bg="dark" variant="dark" style={{width:"100vw"}}>
         <div>
           <Navbar.Brand href="#home">호두네점빵</Navbar.Brand>
@@ -48,8 +64,14 @@ function App() {
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
           <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
         </Route>
+        <Route path="/Cart" element={<Cart />}>
+          
+        </Route>
         <Route path="*" element={<h1>없는 페이지 입니다.</h1>} />
       </Routes>
+      {/* <Link onClick={() => {navigate('/Cart')}}>디테일 페이지로 갑시다</Link> */}
+      <Link to="/Cart">디테일 페이지로 갑시다</Link>
+      <Link to="/">홈 페이지로 갑시다</Link>
 
       {
 
@@ -79,12 +101,15 @@ function App() {
       {
         loding === true ? <h2>로딩중...</h2> : null
       }
-
+      
     </div>
   );
 }
 
 function Event() {
+  
+  let 재고 = useContext(재고context);
+
   return (
     <div>
       <h2>오늘의 이벤트</h2>
