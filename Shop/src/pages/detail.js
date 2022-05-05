@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'react-bootstrap'
+import '../Detail.scss';
 
 // data.js 에 있는 id 값을 불러와야함
 // 지금은 URL 0이면 그냥 id 값이 뭐든 가져오는데
@@ -51,14 +52,20 @@ function DetailApp(props) {
 
 	return (
 		<div className={"container " + "mainStart " + mainFade}>
+			<div className="red">제목</div>
 			{/* {count}
 			<YellowBtn onClick={() => {
 				setCount(count + 1);
 			}}>버튼</YellowBtn> */}
 			{/* <YellowBtn bg="blue">버튼</YellowBtn> */}
-			{/* {
-				alert === true ? <BlackBox >2초 안에 누르면 할인</BlackBox> : null
-			} */}
+			{
+				alert === true ? <BlackBox className='myAlert'>
+					<p>
+						재고가 얼마안남았습니다</p>2초 안에 누르면 할인</BlackBox> : null
+			}
+			<div className='myAlert2'>
+					<p>
+						재고가 얼마안남았습니다</p>2초 안에 누르면 할인</div>
 
 
 			<div className="row">

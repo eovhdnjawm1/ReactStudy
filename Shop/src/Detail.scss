@@ -1,0 +1,49 @@
+$mainColor : #ff0000;
+
+.red {
+	color: $mainColor;
+}
+
+div.container h4 {
+	color: blue;
+}
+
+div.container p {
+	color: green;
+}
+
+// 아래 위 같은 문법 nesting 문법
+div.container {
+	h4 {
+		color: blue;
+	}
+
+	p {
+		color: green
+	}
+}
+
+
+//--------------------
+@mixin 함수() {
+	background-color: #eee;
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 500px;
+	width: 100%;
+	margin: auto;
+}
+
+.myAlert {
+	@include 함수()
+}
+
+.myAlert p {
+	margin: 0;
+}
+
+.myAlert2 {
+	@extend .myAlert;
+	background-color: #ffe591;
+	width: 250px;
+}
