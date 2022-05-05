@@ -8,10 +8,10 @@ function Cart(props) {
 			<Table responsive>
 				<tbody>
 					<tr>
-						<th>#</th>
 						<th>상품명</th>
 						<th>수량</th>
 						<th>가격</th>
+						<th>변경</th>
 					</tr>
 				</tbody>
 
@@ -20,10 +20,24 @@ function Cart(props) {
 						props.state.map((a, i) => {
 							return (
 								<tr key={i}>
-									<td> Table cell</td>
 									<td> {a.name}</td>
 									<td> {a.id}</td>
 									<td> {a.quan}</td>
+									<td> <button onClick={() => {
+										props.dispatch({
+											type : '수량증가',
+											countChange: '수량증가'
+										}) 
+									}}>+</button>
+									
+									
+									</td>
+									<td><button onClick={() => {
+										props.dispatch({
+											type : '',
+											countChange: '수량감소'
+										}) 
+									}}>-</button></td>
 								</tr>
 							)
 						})

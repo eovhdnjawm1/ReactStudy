@@ -7,20 +7,42 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux'
 import { createStore } from 'redux';
 
-let store = createStore(() => {
-  return [
-    {
-      id: 0,
-      name: '멋진신발',
-      quan : 2000,
-    },
-    {
-      id: 1,
-      name: '예쁜신발',
-      quan : 2500,
-    }
-  ]  
-})
+
+
+
+let stanData = [
+  {
+    id: 0,
+    name: '멋진신발',
+    quan : 2000,
+  },
+  {
+    id: 1,
+    name: '예쁜신발',
+    quan : 2500,
+  }
+] 
+
+function reducer(state = stanData, action){
+  if( action.countChange === '수량증가') {
+    // 데이터 수정 조건
+    let copy = [...stanData];
+    copy[0].id++;
+
+    return copy
+  } 
+  else if ( action.countChange === '수량감소'){
+    let copy = [...stanData];
+    copy[0].id--;
+
+    return copy
+  }
+  else{
+    return state
+  }
+}
+
+let store = createStore(reducer)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
