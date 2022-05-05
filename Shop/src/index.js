@@ -12,7 +12,12 @@ let store = createStore(() => {
     {
       id: 0,
       name: '멋진신발',
-      quan : 2,
+      quan : 2000,
+    },
+    {
+      id: 1,
+      name: '예쁜신발',
+      quan : 2500,
     }
   ]  
 })
