@@ -100,16 +100,6 @@ function DetailApp(props) {
 
 function TabContent({tab}){
 
-	// if ( tab == 0) {
-	// 	return <div>내용0</div>
-	// } 
-	// else if( tab == 1){
-	// 	return <div>내용1</div>
-	// }
-	// else if( tab == 2){
-	// 	return <div>내용2</div>
-	// }
-
 let [fade, setFade] = useState('')
 
 	useEffect(() =>{
