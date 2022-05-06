@@ -45,22 +45,37 @@ function Cart(props) {
 					
 				</tbody>
 			</Table>
-			<div className='my-alert'>
+			{
+				props.alert열렸니 === true ? 
+			(<div className='my-alert'>
 				<p>지금 구매하시면 신규할인 20%</p>
-				<button>닫기</button>
-			</div>
+				<button onClick={() => {
+					props.dispatch({
+						type : '닫힘',
+					})
+				}}>닫기</button>
+			</div>)
+			: <button onClick={() => {
+				props.dispatch({
+					type : '열림',
+				})
+			}}>열림</button>
+			}
 		</div>
 	)
 }
 
 function CartPage(state) {
+	
 	return {
-		state: state,
-
+		state: state.reducer,
+		alert열렸니 : state.reducer2,
+		
 		// state는 props 처럼 만들어준다.
 		// state안에 있는 데이터를 다 state로 받아주세요
-		상품명: state[0].name,
+		// 상품명: state[0].name,
 	}
+	console.log(state.reducer2)
 }
 export default connect(CartPage)(Cart);
 // export default Cart;
