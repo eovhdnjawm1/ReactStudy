@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, memo } from 'react';
 import { Table } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useParams,  useNavigate, Link } from 'react-router-dom'
@@ -68,11 +68,33 @@ function Cart(props) {
 				})
 			}}>열림</button>
 			}
-
+			<Parent 이름="존박" 나이="20" />
 			<Link to='/detail/0'>디테일페이지로</Link>
 		</div>
 	)
 }
+
+function Parent(props){
+	return (
+	  <div>
+		<Child1 이름={props.이름}></Child1>
+		<Child2 나이={props.나이}></Child2>
+		
+	  </div>
+	)
+  }
+
+  function Child1(){
+	useEffect( ()=>{ console.log('렌더링됨1') } );
+	return <div>1111</div>
+  }
+
+  let Child2 = memo(function(){
+	useEffect( ()=>{ console.log('렌더링됨2') } );
+	return <div>2222</div>
+  });
+
+
 
 // function CartPage(state) {
 	
