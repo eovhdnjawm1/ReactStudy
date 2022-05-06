@@ -28,9 +28,8 @@ function DetailApp(props) {
 
 	let navigate = useNavigate();
 	let [mainFade, setMainFade ] = useState('');
+	let [idInpuData, setidInputData] = useState(0);
 
-
-	let [count, setCount] = useState(0)
 	let { id } = useParams();
 	let 찾은상품 = props.shoes.find(function (x) {
 		return x.id == id;
@@ -78,6 +77,7 @@ function DetailApp(props) {
 					<p>{찾은상품.content}</p>
 					<p>{찾은상품.price}</p>
 					<input type={"text"}></input>
+
 					<button onClick={() => {
 						props.dispatch({
 							type : '항목추가',
@@ -134,12 +134,7 @@ function DetailReducer(state) {
 	return {
 		state: state.reducer,
 		alert열렸니 : state.reducer2,
-		
-		// state는 props 처럼 만들어준다.
-		// state안에 있는 데이터를 다 state로 받아주세요
-		// 상품명: state[0].name,
 	}
-	console.log(state.reducer2)
 }
 
 

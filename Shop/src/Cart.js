@@ -1,8 +1,15 @@
 import React from 'react';
 import { Table } from 'react-bootstrap'
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { useParams,  useNavigate, Link } from 'react-router-dom'
 
 function Cart(props) {
+
+	// redux안에 있는 모든 state
+
+	let state = useSelector((state) => state.reducer)
+	console.log(state)
+	let dispatch = useDispatch();
 
 	return (
 		<div>
@@ -18,14 +25,14 @@ function Cart(props) {
 
 				<tbody>
 					{
-						props.state.map((a, i) => {
+						state.map((a, i) => {
 							return (
 								<tr key={i}>
 									<td> {a.name}</td>
 									<td> {a.id}</td>
 									<td> {a.quan}</td>
 									<td> <button onClick={() => {
-										props.dispatch({
+										dispatch({
 											type : '수량증가',
 											payload : {name: 'Kim'}
 										}) 
@@ -34,7 +41,7 @@ function Cart(props) {
 									
 									</td>
 									<td><button onClick={() => {
-										props.dispatch({
+										dispatch({
 											type : '',
 											countChange: '수량감소'
 										}) 
@@ -62,21 +69,22 @@ function Cart(props) {
 				})
 			}}>열림</button>
 			}
+
+			<Link to='/detail/0'>디테일페이지로</Link>
 		</div>
 	)
 }
 
-function CartPage(state) {
+// function CartPage(state) {
 	
-	return {
-		state: state.reducer,
-		alert열렸니 : state.reducer2,
+// 	return {
+// 		state: state.reducer,
+// 		alert열렸니 : state.reducer2,
 		
-		// state는 props 처럼 만들어준다.
-		// state안에 있는 데이터를 다 state로 받아주세요
-		// 상품명: state[0].name,
-	}
-	console.log(state.reducer2)
-}
-export default connect(CartPage)(Cart);
-// export default Cart;
+// 		// state는 props 처럼 만들어준다.
+// 		// state안에 있는 데이터를 다 state로 받아주세요
+// 		// 상품명: state[0].name,
+// 	}
+// }
+// export default connect(CartPage)(Cart);
+export default Cart;

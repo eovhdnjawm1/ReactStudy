@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -43,9 +43,9 @@ function reducer2(state = alert초기값, action) {
 
 
 function reducer(state = stanData, action) {
+
   if ( action.type === '항목추가') {
-    console.log(action)
-    let copy = [...stanData];
+    let copy = [...state]
     copy.push(action.payload);
     return copy
   }
