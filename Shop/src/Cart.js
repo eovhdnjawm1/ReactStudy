@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap'
 import { connect } from 'react-redux';
 
 function Cart(props) {
+
 	return (
 		<div>
 			<Table responsive>
@@ -26,7 +27,7 @@ function Cart(props) {
 									<td> <button onClick={() => {
 										props.dispatch({
 											type : '수량증가',
-											countChange: '수량증가'
+											payload : {name: 'Kim'}
 										}) 
 									}}>+</button>
 									
