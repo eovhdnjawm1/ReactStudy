@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux'
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 
 
@@ -22,6 +22,13 @@ let stanData = [
     quan : 2500,
   }
 ] 
+
+let alert초기값 = true;
+
+function reducer2(state = alert초기값, action){
+  
+  return state;
+}
 
 function reducer(state = stanData, action){
   if( action.countChange === '수량증가') {
@@ -42,7 +49,7 @@ function reducer(state = stanData, action){
   }
 }
 
-let store = createStore(reducer)
+let store = createStore(combineReducers({reducer, reducer2}))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
