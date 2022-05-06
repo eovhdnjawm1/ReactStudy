@@ -77,14 +77,17 @@ function DetailApp(props) {
 					<p>{찾은상품.content}</p>
 					<p>{찾은상품.price}</p>
 					<input type={"text"}></input>
+					{
+						console.log(찾은상품.id)
+					}
 
 					<button onClick={() => {
 						props.dispatch({
 							type : '항목추가',
 							payload : {
-								id : 3,
-								name : '새로운상품',
-								quan : 1250,
+								id : 찾은상품.id + 2,
+								name : 찾은상품.title,
+								quan : 1,
 							}
 						}); 
 						navigate('/Cart');

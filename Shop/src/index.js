@@ -14,12 +14,12 @@ let stanData = [
   {
     id: 0,
     name: '멋진신발',
-    quan: 2000,
+    quan: 1,
   },
   {
     id: 1,
     name: '예쁜신발',
-    quan: 2500,
+    quan: 1,
   }
 ]
 
@@ -45,21 +45,41 @@ function reducer2(state = alert초기값, action) {
 function reducer(state = stanData, action) {
 
   if ( action.type === '항목추가') {
-    let copy = [...state]
-    copy.push(action.payload);
-    return copy
+    let found = state.findIndex((e) => {
+      return e.id === action.payload.id
+      // stanData id 값 검색해서
+      // 항목 추가한 action.payload.id 즉 인덱스값을 가져온다.
+      // 0 이라는 아이디가 있다?
+      // quan 검색해야하는거아닌가?
+      // 그래 같은 아이디 있는지 없는지 찾았어 
+    })
+    if(found >= 0){
+      let copy = [...state]
+      copy[found].quan++;
+      stanData = [...copy]
+      return copy
+      
+    } else{
+      let copy = [...state]
+      copy.push(action.payload);
+      stanData = [...copy]
+      return copy
+    }
+    
   }
 
-  if (action.countChange === '수량증가') {
+  if (action.type === '수량증가') {
     // 데이터 수정 조건
+
     let copy = [...stanData];
-    copy[0].id++;
+
+    copy[action.데이터].quan++;
 
     return copy
   }
-  else if (action.countChange === '수량감소') {
+  else if (action.type === '수량감소') {
     let copy = [...stanData];
-    copy[0].id--;
+    copy[action.데이터].quan--;
 
     return copy
   }

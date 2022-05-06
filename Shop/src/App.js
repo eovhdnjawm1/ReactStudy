@@ -130,8 +130,11 @@ function About() {
 
 
 function MenusCom(props) {
+
+  let navigate = useNavigate();
+  console.log(props.shoes[props.i].id)
   return (
-    <div>
+    <div onClick={() => { navigate('/detail/' + props.i)}}>
       <img src={`${props.shoes[props.i].image}`} alt="#" width="80%" />
       <h4>{props.shoes[props.i].title}</h4>
       <p>{props.shoes[props.i].price}</p>

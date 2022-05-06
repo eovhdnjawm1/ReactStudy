@@ -8,7 +8,6 @@ function Cart(props) {
 	// redux안에 있는 모든 state
 
 	let state = useSelector((state) => state.reducer)
-	console.log(state)
 	let dispatch = useDispatch();
 
 	return (
@@ -17,8 +16,8 @@ function Cart(props) {
 				<tbody>
 					<tr>
 						<th>상품명</th>
+						<th>넘버</th>
 						<th>수량</th>
-						<th>가격</th>
 						<th>변경</th>
 					</tr>
 				</tbody>
@@ -34,7 +33,7 @@ function Cart(props) {
 									<td> <button onClick={() => {
 										dispatch({
 											type : '수량증가',
-											payload : {name: 'Kim'}
+											데이터 : a.id,
 										}) 
 									}}>+</button>
 									
@@ -42,8 +41,8 @@ function Cart(props) {
 									</td>
 									<td><button onClick={() => {
 										dispatch({
-											type : '',
-											countChange: '수량감소'
+											type : '수량감소',
+											데이터 : a.id,
 										}) 
 									}}>-</button></td>
 								</tr>
@@ -54,17 +53,17 @@ function Cart(props) {
 				</tbody>
 			</Table>
 			{
-				props.alert열렸니 === true ? 
+				state.alert열렸니 === true ? 
 			(<div className='my-alert'>
 				<p>지금 구매하시면 신규할인 20%</p>
 				<button onClick={() => {
-					props.dispatch({
+					dispatch({
 						type : '닫힘',
 					})
 				}}>닫기</button>
 			</div>)
 			: <button onClick={() => {
-				props.dispatch({
+				dispatch({
 					type : '열림',
 				})
 			}}>열림</button>
