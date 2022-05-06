@@ -82,17 +82,17 @@ function Parent(props){
 		
 	  </div>
 	)
-  }
+}
 
   function Child1(){
 	useEffect( ()=>{ console.log('렌더링됨1') } );
 	return <div>1111</div>
-  }
+}
 
   let Child2 = memo(function(){
 	useEffect( ()=>{ console.log('렌더링됨2') } );
 	return <div>2222</div>
-  });
+});
 
 
 
