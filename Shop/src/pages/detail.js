@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState  } from 'react'
+import { useParams,  useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav } from 'react-bootstrap'
 import '../Detail.scss';
+import { connect } from 'react-redux';
 
 // data.js 에 있는 id 값을 불러와야함
 // 지금은 URL 0이면 그냥 id 값이 뭐든 가져오는데
@@ -25,9 +26,9 @@ let BlackBox = styled.div`
 // setTimeout(() => {실행할 코드}, 1000 ms) 
 function DetailApp(props) {
 
+	let navigate = useNavigate();
 	let [mainFade, setMainFade ] = useState('');
 
-	
 
 	let [count, setCount] = useState(0)
 	let { id } = useParams();
@@ -77,7 +78,17 @@ function DetailApp(props) {
 					<p>{찾은상품.content}</p>
 					<p>{찾은상품.price}</p>
 					<input type={"text"}></input>
-					<button className="btn btn-danger">주문하기</button>
+					<button onClick={() => {
+						props.dispatch({
+							type : '항목추가',
+							payload : {
+								id : 3,
+								name : '새로운상품',
+								quan : 1250,
+							}
+						}); 
+						navigate('/Cart');
+					}} className="btn btn-danger">주문하기</button>
 				</div>
 			</div>
 			<section className="subMenus">
@@ -118,6 +129,18 @@ let [fade, setFade] = useState('')
 	</div>
 }
 
+function DetailReducer(state) {
+	
+	return {
+		state: state.reducer,
+		alert열렸니 : state.reducer2,
+		
+		// state는 props 처럼 만들어준다.
+		// state안에 있는 데이터를 다 state로 받아주세요
+		// 상품명: state[0].name,
+	}
+	console.log(state.reducer2)
+}
 
 
-export default DetailApp
+export default connect(DetailReducer)(DetailApp);
