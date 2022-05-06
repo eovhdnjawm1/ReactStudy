@@ -43,6 +43,13 @@ function reducer2(state = alert초기값, action) {
 
 
 function reducer(state = stanData, action) {
+  if ( action.type === '항목추가') {
+    console.log(action)
+    let copy = [...stanData];
+    copy.push(action.payload);
+    return copy
+  }
+
   if (action.countChange === '수량증가') {
     // 데이터 수정 조건
     let copy = [...stanData];
